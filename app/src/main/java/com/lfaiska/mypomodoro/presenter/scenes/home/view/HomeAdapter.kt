@@ -25,6 +25,6 @@ class HomeAdapter(fm: FragmentManager, var context: Context) : FragmentPagerAdap
         1 -> context.getString(R.string.toolbar_title_history)
         else -> ""
     }
-
+    
     override fun getCount(): Int = 2
 }
