@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable name="viewModel" type="com.lfaiska.mypomodoro.presenter.scenes.splash.viewModel.SplashViewModel"/>
+        <variable name="viewModel" type="com.lfaiska.mypomodoro.presenter.scenes.splash.viewmodel.SplashViewModel"/>
     </data>
 
     <RelativeLayout

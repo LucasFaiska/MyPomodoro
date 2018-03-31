@@ -1,4 +1,4 @@
-package com.lfaiska.mypomodoro.presenter.scenes.splash.viewModel
+package com.lfaiska.mypomodoro.presenter.scenes.splash.viewmodel
 
 import com.lfaiska.mypomodoro.presenter.scenes.splash.view.SplashNavigation
 import io.reactivex.Completable

@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.lfaiska.mypomodoro.MainApplication
 import com.lfaiska.mypomodoro.R
-import com.lfaiska.mypomodoro.presenter.scenes.splash.viewModel.SplashViewModel
+import com.lfaiska.mypomodoro.presenter.scenes.splash.viewmodel.SplashViewModel
 import android.databinding.DataBindingUtil
 import com.lfaiska.mypomodoro.databinding.SplashActivityBinding
 import com.lfaiska.mypomodoro.presenter.scenes.home.view.HomeActivity
