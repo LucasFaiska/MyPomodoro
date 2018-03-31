@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">My Pomodoro</string>
+    <string name="toolbar_title_timer">New</string>
+    <string name="toolbar_title_history">History</string>
 </resources>

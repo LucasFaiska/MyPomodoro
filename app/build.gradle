@@ -19,18 +19,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        buildConfigField(RES_VALUE_INT, SPLASH_TIME_SECONDS, "3")
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField(RES_VALUE_INT, POMODORO_TIME_MINUTES, "25")
-        }
-        develop {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField(RES_VALUE_INT, POMODORO_TIME_MINUTES, "1")
         }
     }
     dataBinding {
@@ -55,4 +48,11 @@ dependencies {
     provided 'javax.annotation:jsr250-api:1.0'
     kapt 'com.google.dagger:dagger-compiler:2.11'
     kapt 'com.android.databinding:compiler:2.3.1'
+
+    compile 'io.reactivex.rxjava2:rxjava:2.1.1'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+    compile 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support:support-v4:26.1.0'
 }
