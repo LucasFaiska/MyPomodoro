@@ -18,6 +18,8 @@ class HistoryListItemViewModel(var pomodoro: Pomodoro) {
     }
 
     fun getStatus(): String {
-        return if (pomodoro.status == Pomodoro.STATUS_STOPED) "Stopped" else "Finished"
+        with(Pomodoro) {
+            return if (pomodoro.status == STATUS_STOPPED) STATUS_STOPPED_LABEL else STATUS_FINISHED_LABEL
+        }
     }
 }

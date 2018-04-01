@@ -12,6 +12,8 @@ class Pomodoro (var runningTime: Long,
 
     companion object {
         var STATUS_FINISHED = 0
-        var STATUS_STOPED = 1
+        var STATUS_FINISHED_LABEL = "Finished"
+        var STATUS_STOPPED = 1
+        var STATUS_STOPPED_LABEL = "Stopped"
     }
 }

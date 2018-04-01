@@ -54,7 +54,7 @@ class TimerViewModel @Inject constructor(var repository: PomodoroRepository) : P
     fun stopPomodoro() {
         resetFormattedTimer()
         timer.cancel()
-        registerPomodoroHistory(Pomodoro.STATUS_STOPED)
+        registerPomodoroHistory(Pomodoro.STATUS_STOPPED)
     }
 
     fun resetFormattedTimer() {
