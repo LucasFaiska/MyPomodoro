@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="tab_bar_indicator_height">3dp</dimen>
+    <dimen name="timer_text_size">80sp</dimen>
     <dimen name="timer_button_margin">16dp</dimen>
+    <dimen name="history_header_height">45dp</dimen>
+    <dimen name="history_header_text_size">15sp</dimen>
 </resources>

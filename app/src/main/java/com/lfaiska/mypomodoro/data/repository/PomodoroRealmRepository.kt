@@ -5,6 +5,7 @@ import com.lfaiska.mypomodoro.data.mapper.PomodoroMapper
 import com.lfaiska.mypomodoro.domain.Pomodoro
 import com.lfaiska.mypomodoro.domain.repository.PomodoroRepository
 import io.realm.Realm
+import io.realm.kotlin.where
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -16,7 +17,7 @@ import javax.inject.Singleton
 class PomodoroRealmRepository @Inject constructor(var realm: Realm): PomodoroRepository {
 
     override fun getHistory(): List<Pomodoro>? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return PomodoroMapper.toListDomainObject(realm.where<PomodoroRealmEntity>().findAll())
     }
 
     override fun save(pomodoro: Pomodoro) {

@@ -10,6 +10,10 @@ import com.lfaiska.mypomodoro.domain.Pomodoro
 class PomodoroMapper {
 
     companion object {
+        fun toListDomainObject(realmEntityList: List<PomodoroRealmEntity>): List<Pomodoro> {
+            return realmEntityList?.map { toDomainObject(it) }
+        }
+
         fun toDomainObject(realmEntity: PomodoroRealmEntity): Pomodoro {
             with(realmEntity) {
                 return Pomodoro(runningTime, endTime, status)

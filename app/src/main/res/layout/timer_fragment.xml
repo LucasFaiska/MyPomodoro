@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="80sp"
+            android:textSize="@dimen/timer_text_size"
             android:text="@{viewModel.formattedTimer}"
             android:textColor="@{context.getResources().getColor(viewModel.timerColor)}"
             tools:text="25:00" />
