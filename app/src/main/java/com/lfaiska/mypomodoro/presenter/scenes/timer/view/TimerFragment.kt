@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.lfaiska.mypomodoro.MainApplication
 import com.lfaiska.mypomodoro.R
 import com.lfaiska.mypomodoro.databinding.TimerFragmentBinding
+import com.lfaiska.mypomodoro.presenter.scenes.history.view.HistoryListener
 import com.lfaiska.mypomodoro.presenter.scenes.timer.viewmodel.TimerViewModel
 import javax.inject.Inject
 
@@ -23,11 +24,14 @@ class TimerFragment : Fragment() {
 
     private lateinit var binding: TimerFragmentBinding
 
+    lateinit var historyListener: HistoryListener
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         injectDependencies()
         binding = DataBindingUtil.inflate(inflater, R.layout.timer_fragment, container, false)
         binding.viewModel = viewModel
+        viewModel.historyListener = historyListener
         return binding.root
     }
 

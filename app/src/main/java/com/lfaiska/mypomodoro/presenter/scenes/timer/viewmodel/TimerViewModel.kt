@@ -6,6 +6,7 @@ import android.view.View
 import com.lfaiska.mypomodoro.R
 import com.lfaiska.mypomodoro.domain.Pomodoro
 import com.lfaiska.mypomodoro.domain.repository.PomodoroRepository
+import com.lfaiska.mypomodoro.presenter.scenes.history.view.HistoryListener
 import com.lfaiska.mypomodoro.presenter.scenes.timer.pomodoro.PomodoroCountDownTimer
 import com.lfaiska.mypomodoro.presenter.scenes.timer.pomodoro.PomodoroCountDownTimerListener
 import java.util.*
@@ -22,6 +23,8 @@ class TimerViewModel @Inject constructor(var repository: PomodoroRepository) : P
     var timerColor = ObservableInt(R.color.mediumGray)
     var formattedTimer = ObservableField<String>()
     var timer = PomodoroCountDownTimer()
+
+    lateinit var historyListener: HistoryListener
 
     init {
         timer.listener = this
@@ -63,6 +66,7 @@ class TimerViewModel @Inject constructor(var repository: PomodoroRepository) : P
 
     fun registerPomodoroHistory(status: Int) {
         repository.save(Pomodoro(timer.runningTime, Date(), status))
+        historyListener?.let { it.onPomodoroRegister()  }
     }
 
     override fun onTick(timer: String) {

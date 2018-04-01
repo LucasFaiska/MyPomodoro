@@ -14,7 +14,7 @@ class HistoryViewModel @Inject constructor(var repository: PomodoroRepository) {
 
     fun getHistoryList(): List<HistorySectionAdapter>? {
         return repository.getHistory()?.let {
-            it.groupBy { formatDate(it.endTime) }.map { HistorySectionAdapter( it.key, it.value) }
+             it.groupBy { formatDate(it.endTime) }.map { HistorySectionAdapter( it.key, it.value) }
         }
     }
 

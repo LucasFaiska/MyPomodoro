@@ -19,7 +19,7 @@ import javax.inject.Inject
  * Created by lucas on 30/03/18.
  */
 
-class HistoryFragment : Fragment() {
+class HistoryFragment : Fragment(), HistoryListener {
 
     @Inject
     lateinit var viewModel: HistoryViewModel
@@ -49,5 +49,9 @@ class HistoryFragment : Fragment() {
     fun updateHistoryAdapter() {
         adapter.items = viewModel.getHistoryList()!!
         adapter.notifyAllSectionsDataSetChanged()
+    }
+
+    override fun onPomodoroRegister() {
+        updateHistoryAdapter()
     }
 }

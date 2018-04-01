@@ -4,6 +4,7 @@ import android.content.Context
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.view.ViewGroup
 import com.lfaiska.mypomodoro.R
 import com.lfaiska.mypomodoro.presenter.scenes.history.view.HistoryFragment
 import com.lfaiska.mypomodoro.presenter.scenes.timer.view.TimerFragment
@@ -14,9 +15,16 @@ import com.lfaiska.mypomodoro.presenter.scenes.timer.view.TimerFragment
 
 class HomeAdapter(fm: FragmentManager, var context: Context) : FragmentPagerAdapter(fm) {
 
+    var timerFragment = TimerFragment()
+    var historyFragment  = HistoryFragment()
+
+    init {
+        timerFragment.historyListener = historyFragment
+    }
+
     override fun getItem(position: Int): Fragment? = when (position) {
-        0 -> TimerFragment()
-        1 -> HistoryFragment()
+        0 -> timerFragment
+        1 -> historyFragment
         else -> null
     }
 
@@ -25,6 +33,8 @@ class HomeAdapter(fm: FragmentManager, var context: Context) : FragmentPagerAdap
         1 -> context.getString(R.string.toolbar_title_history)
         else -> ""
     }
-    
+
     override fun getCount(): Int = 2
+
+
 }
