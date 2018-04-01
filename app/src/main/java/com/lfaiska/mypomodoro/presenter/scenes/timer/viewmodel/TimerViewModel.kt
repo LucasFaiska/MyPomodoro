@@ -9,6 +9,7 @@ import com.lfaiska.mypomodoro.domain.repository.PomodoroRepository
 import com.lfaiska.mypomodoro.presenter.scenes.history.view.HistoryListener
 import com.lfaiska.mypomodoro.presenter.scenes.timer.pomodoro.PomodoroCountDownTimer
 import com.lfaiska.mypomodoro.presenter.scenes.timer.pomodoro.PomodoroCountDownTimerListener
+import com.lfaiska.mypomodoro.presenter.scenes.timer.view.TimerInteraction
 import java.util.*
 import javax.inject.Inject
 
@@ -25,6 +26,7 @@ class TimerViewModel @Inject constructor(var repository: PomodoroRepository) : P
     var timer = PomodoroCountDownTimer()
 
     lateinit var historyListener: HistoryListener
+    lateinit var interaction: TimerInteraction
 
     init {
         timer.listener = this
@@ -79,6 +81,7 @@ class TimerViewModel @Inject constructor(var repository: PomodoroRepository) : P
     }
 
     override fun onFinish() {
+        interaction.showFinishAlertDialog()
         toggleTimerState()
         resetFormattedTimer()
         registerPomodoroHistory(Pomodoro.STATUS_FINISHED)
