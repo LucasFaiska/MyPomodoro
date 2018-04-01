@@ -5,4 +5,8 @@
     <dimen name="timer_button_margin">16dp</dimen>
     <dimen name="history_header_height">45dp</dimen>
     <dimen name="history_header_text_size">15sp</dimen>
+    <dimen name="history_list_padding">16dp</dimen>
+    <dimen name="history_list_item_timer_text_size">32sp</dimen>
+    <dimen name="history_list_item_status_text_size">14sp</dimen>
+    <dimen name="history_list_item_endtime_text_size">14sp</dimen>
 </resources>

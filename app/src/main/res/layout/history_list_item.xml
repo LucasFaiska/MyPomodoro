@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        android:padding="16dp">
+        android:padding="@dimen/history_list_padding">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{viewModel.formattedRunningTime}"
                 android:textColor="@android:color/black"
-                android:textSize="32sp"
+                android:textSize="@dimen/history_list_item_timer_text_size"
                 tools:text="25:00" />
 
             <TextView
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{viewModel.status}"
                 android:textColor="@color/mediumGray"
-                android:textSize="14sp"
+                android:textSize="@dimen/history_list_item_status_text_size"
                 tools:text="Finished" />
 
         </LinearLayout>
@@ -48,7 +48,7 @@
             android:layout_centerVertical="true"
             android:text="@{viewModel.formattedEndTime}"
             android:textColor="@color/mediumGray"
-            android:textSize="14sp"
+            android:textSize="@dimen/history_list_item_endtime_text_size"
             tools:text="12:45" />
 
     </RelativeLayout>
