@@ -33,16 +33,21 @@ class TimerViewModel @Inject constructor(var repository: PomodoroRepository) : P
 
     fun onButtonTouched(view: View) {
         toggleTimerState()
+        toggleView()
+        if (isTimerRunning) startPomodoro() else stopPomodoro()
+    }
+
+    private fun toggleView() {
         buttonIcon.set(toggleButtonIcon())
         timerColor.set(toggleTimerColor())
     }
 
     private fun toggleTimerState() {
-        if (isTimerRunning) stopPomodoro() else startPomodoro()
         isTimerRunning = !isTimerRunning
     }
 
     fun startPomodoro() {
+        timer.restartRunningTime()
         timer.start()
     }
 
@@ -74,6 +79,9 @@ class TimerViewModel @Inject constructor(var repository: PomodoroRepository) : P
     }
 
     override fun onFinish() {
-        //@TODO need to finish this
+        toggleTimerState()
+        resetFormattedTimer()
+        registerPomodoroHistory(Pomodoro.STATUS_FINISHED)
+        toggleView()
     }
 }

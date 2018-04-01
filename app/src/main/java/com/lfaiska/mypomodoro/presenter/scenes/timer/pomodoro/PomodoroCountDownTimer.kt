@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit
 class PomodoroCountDownTimer : CountDownTimer(POMODORO_TIME, TICK_TIME) {
 
     companion object {
-        var POMODORO_TIME = TimeUnit.MINUTES.toMillis(25)
+        var POMODORO_TIME = TimeUnit.MINUTES.toMillis(1)
         var TICK_TIME = TimeUnit.SECONDS.toMillis(1)
     }
 
@@ -25,7 +25,12 @@ class PomodoroCountDownTimer : CountDownTimer(POMODORO_TIME, TICK_TIME) {
     }
 
     override fun onFinish() {
+        runningTime = POMODORO_TIME
         listener.onFinish()
+    }
+
+    fun restartRunningTime() {
+        runningTime = 0
     }
 
     fun getFormattedInitialTimer(): String {
