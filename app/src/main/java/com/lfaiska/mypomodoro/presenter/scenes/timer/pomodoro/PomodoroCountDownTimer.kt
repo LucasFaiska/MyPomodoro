@@ -33,8 +33,6 @@ class PomodoroCountDownTimer : CountDownTimer(POMODORO_TIME, TICK_TIME) {
     }
 
     private fun getFormattedTimer(time: Long): String {
-        val date = Date(time)
-        val formatter = SimpleDateFormat("mm:ss")
-        return formatter.format(date)
+        return SimpleDateFormat("mm:ss").format(Date(time))
     }
 }

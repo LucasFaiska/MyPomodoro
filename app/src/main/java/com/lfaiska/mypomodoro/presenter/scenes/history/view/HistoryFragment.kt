@@ -9,7 +9,10 @@ import android.view.ViewGroup
 import com.lfaiska.mypomodoro.MainApplication
 import com.lfaiska.mypomodoro.R
 import com.lfaiska.mypomodoro.databinding.HistoryFragmentBinding
+import com.lfaiska.mypomodoro.presenter.scenes.history.list.HistoryAdapter
 import com.lfaiska.mypomodoro.presenter.scenes.history.viewmodel.HistoryViewModel
+import kotlinx.android.synthetic.main.history_fragment.view.*
+import org.zakariya.stickyheaders.StickyHeaderLayoutManager
 import javax.inject.Inject
 
 /**
@@ -21,6 +24,7 @@ class HistoryFragment : Fragment() {
     @Inject
     lateinit var viewModel: HistoryViewModel
 
+    var adapter = HistoryAdapter()
     private lateinit var binding: HistoryFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -28,10 +32,22 @@ class HistoryFragment : Fragment() {
         injectDependencies()
         binding = DataBindingUtil.inflate(inflater, R.layout.history_fragment, container, false)
         binding.viewModel = viewModel
+        binding.historyRecyclerView.layoutManager = StickyHeaderLayoutManager()
+        binding.historyRecyclerView.adapter = adapter
         return binding.root
+    }
+
+    override fun onResume() {
+        updateHistoryAdapter()
+        super.onResume()
     }
 
     fun injectDependencies() {
         MainApplication.appComponent.inject(this)
+    }
+
+    fun updateHistoryAdapter() {
+        adapter.items = viewModel.getHistoryList()!!
+        adapter.notifyAllSectionsDataSetChanged()
     }
 }

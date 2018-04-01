@@ -1,6 +1,7 @@
 package com.lfaiska.mypomodoro.presenter.scenes.history.list
 
 import android.databinding.DataBindingUtil
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.lfaiska.mypomodoro.R
@@ -14,8 +15,7 @@ import org.zakariya.stickyheaders.SectioningAdapter
 
 class HistoryAdapter: SectioningAdapter() {
 
-    var items : List<HistoryListItemViewModel> = emptyList()
-    var headers : List<String> = emptyList()
+    var items : List<HistorySectionAdapter> = emptyList()
 
     override fun onCreateHeaderViewHolder(parent: ViewGroup?, headerUserType: Int): HeaderViewHolder {
         val binding = DataBindingUtil.inflate<HistoryListHeaderBinding>(LayoutInflater.from(parent?.context), R.layout.history_list_header, parent, false)
@@ -23,7 +23,7 @@ class HistoryAdapter: SectioningAdapter() {
     }
 
     override fun onBindHeaderViewHolder(viewHolder: HeaderViewHolder?, sectionIndex: Int, headerUserType: Int) {
-        (viewHolder as HistoryListHeaderViewHolder).setHeader(headers.get(sectionIndex))
+        (viewHolder as HistoryListHeaderViewHolder).setHeader(items.get(sectionIndex).header)
     }
 
     override fun onCreateItemViewHolder(parent: ViewGroup?, itemUserType: Int): ItemViewHolder {
@@ -32,7 +32,19 @@ class HistoryAdapter: SectioningAdapter() {
     }
 
     override fun onBindItemViewHolder(viewHolder: ItemViewHolder?, sectionIndex: Int, itemIndex: Int, itemUserType: Int) {
-        (viewHolder as HistoryListItemViewHolder).bind(items.get(itemIndex))
+        (viewHolder as HistoryListItemViewHolder).bind(HistoryListItemViewModel(items.get(sectionIndex).historyListItems[itemIndex]))
+    }
+
+    override fun getNumberOfSections(): Int {
+        return items.size
+    }
+
+    override fun getNumberOfItemsInSection(sectionIndex: Int): Int {
+        return items.get(sectionIndex).historyListItems.size
+    }
+
+    override fun doesSectionHaveHeader(sectionIndex: Int): Boolean {
+        return !items.get(sectionIndex).historyListItems.isEmpty()
     }
 }
 
