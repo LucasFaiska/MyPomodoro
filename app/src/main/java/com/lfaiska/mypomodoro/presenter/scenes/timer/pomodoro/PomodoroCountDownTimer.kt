@@ -17,8 +17,10 @@ class PomodoroCountDownTimer : CountDownTimer(POMODORO_TIME, TICK_TIME) {
     }
 
     lateinit var listener: PomodoroCountDownTimerListener
+    var runningTime: Long = 0
 
     override fun onTick(p0: Long) {
+        runningTime += TICK_TIME
         listener.onTick(getFormattedTimer(p0))
     }
 

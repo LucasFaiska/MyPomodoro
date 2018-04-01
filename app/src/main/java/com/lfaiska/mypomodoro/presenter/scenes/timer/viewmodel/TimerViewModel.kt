@@ -4,15 +4,18 @@ import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.view.View
 import com.lfaiska.mypomodoro.R
+import com.lfaiska.mypomodoro.domain.Pomodoro
+import com.lfaiska.mypomodoro.domain.repository.PomodoroRepository
 import com.lfaiska.mypomodoro.presenter.scenes.timer.pomodoro.PomodoroCountDownTimer
 import com.lfaiska.mypomodoro.presenter.scenes.timer.pomodoro.PomodoroCountDownTimerListener
+import java.util.*
 import javax.inject.Inject
 
 /**
  * Created by lucas on 31/03/18.
  */
 
-class TimerViewModel @Inject constructor() : PomodoroCountDownTimerListener {
+class TimerViewModel @Inject constructor(var repository: PomodoroRepository) : PomodoroCountDownTimerListener {
 
     var isTimerRunning = false
     var buttonIcon = ObservableInt(R.drawable.ic_play_arrow)
@@ -22,34 +25,44 @@ class TimerViewModel @Inject constructor() : PomodoroCountDownTimerListener {
 
     init {
         timer.listener = this
-        formattedTimer.set(timer.getFormattedInitialTimer())
+        resetFormattedTimer()
     }
 
     fun onButtonTouched(view: View) {
         toggleTimerState()
+        buttonIcon.set(toggleButtonIcon())
+        timerColor.set(toggleTimerColor())
     }
 
     private fun toggleTimerState() {
-        if (isTimerRunning) {
-            stopPomodoro()
-        } else {
-            startPomodoro()
-        }
-
+        if (isTimerRunning) stopPomodoro() else startPomodoro()
         isTimerRunning = !isTimerRunning
     }
 
     fun startPomodoro() {
         timer.start()
-        buttonIcon.set(R.drawable.ic_stop)
-        timerColor.set(R.color.colorPrimaryDark)
     }
 
     fun stopPomodoro() {
-        formattedTimer.set(timer.getFormattedInitialTimer())
+        resetFormattedTimer()
         timer.cancel()
-        buttonIcon.set(R.drawable.ic_play_arrow)
-        timerColor.set(R.color.mediumGray)
+        registerPomodoro(Pomodoro.STATUS_STOPED)
+    }
+
+    fun resetFormattedTimer() {
+        formattedTimer.set(timer.getFormattedInitialTimer())
+    }
+
+    fun toggleButtonIcon(): Int {
+        return if (isTimerRunning) R.drawable.ic_stop else R.drawable.ic_play_arrow
+    }
+
+    fun toggleTimerColor(): Int {
+        return if (isTimerRunning) R.color.colorPrimaryDark else R.color.mediumGray
+    }
+
+    fun registerPomodoro(status: Int) {
+        repository.save(Pomodoro(timer.runningTime, Date(), status))
     }
 
     override fun onTick(timer: String) {

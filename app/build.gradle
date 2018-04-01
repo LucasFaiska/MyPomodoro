@@ -6,11 +6,9 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
-android {
-    def SPLASH_TIME_SECONDS = "SPLASH_TIME_SECONDS"
-    def POMODORO_TIME_MINUTES = "POMODORO_TIME_MINUTES"
-    def RES_VALUE_INT = "int"
+apply plugin: 'realm-android'
 
+android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.lfaiska.mypomodoro"
