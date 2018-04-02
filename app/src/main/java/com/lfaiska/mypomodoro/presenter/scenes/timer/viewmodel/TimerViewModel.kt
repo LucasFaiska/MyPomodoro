@@ -17,50 +17,47 @@ import javax.inject.Inject
  * Created by lucas on 31/03/18.
  */
 
-class TimerViewModel @Inject constructor(var repository: PomodoroRepository) : PomodoroCountDownTimerListener {
+open class TimerViewModel @Inject constructor(var repository: PomodoroRepository) : PomodoroCountDownTimerListener {
 
     var isTimerRunning = false
     var buttonIcon = ObservableInt(R.drawable.ic_play_arrow)
     var timerColor = ObservableInt(R.color.mediumGray)
     var formattedTimer = ObservableField<String>()
-    var timer = PomodoroCountDownTimer()
 
     lateinit var historyListener: HistoryListener
     lateinit var interaction: TimerInteraction
 
-    init {
-        timer.listener = this
+    fun setup() {
         resetFormattedTimer()
     }
 
-    fun onButtonTouched(view: View) {
+    fun onButtonTouched(view: View?) {
         toggleTimerState()
         toggleView()
         if (isTimerRunning) startPomodoro() else stopPomodoro()
     }
 
-    private fun toggleView() {
+    fun toggleView() {
         buttonIcon.set(toggleButtonIcon())
         timerColor.set(toggleTimerColor())
     }
 
-    private fun toggleTimerState() {
+    fun toggleTimerState() {
         isTimerRunning = !isTimerRunning
     }
 
     fun startPomodoro() {
-        timer.restartRunningTime()
-        timer.start()
+        interaction.startTimer()
     }
 
     fun stopPomodoro() {
         resetFormattedTimer()
-        timer.cancel()
+        interaction.stopTimer()
         registerPomodoroHistory(Pomodoro.STATUS_STOPPED)
     }
 
     fun resetFormattedTimer() {
-        formattedTimer.set(timer.getFormattedInitialTimer())
+        formattedTimer.set(interaction.getFormattedInitialTimer())
     }
 
     fun toggleButtonIcon(): Int {
@@ -72,7 +69,7 @@ class TimerViewModel @Inject constructor(var repository: PomodoroRepository) : P
     }
 
     fun registerPomodoroHistory(status: Int) {
-        repository.save(Pomodoro(timer.runningTime, Date(), status))
+        repository.save(Pomodoro(interaction.getTimerRunningTime(), Date(), status))
         historyListener?.let { it.onPomodoroRegister()  }
     }
 
