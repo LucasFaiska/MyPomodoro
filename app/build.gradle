@@ -8,6 +8,18 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'realm-android'
 
+apply plugin: 'io.fabric'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -31,6 +43,11 @@ android {
 
 kapt {
     generateStubs = true
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://maven.fabric.io/public' }
 }
 
 dependencies {
@@ -58,4 +75,8 @@ dependencies {
     compile 'org.zakariya.stickyheaders:stickyheaders:0.7.6'
 
     testCompile 'org.mockito:mockito-core:1.10.19'
+
+    compile('com.crashlytics.sdk.android:crashlytics:2.9.2@aar') {
+        transitive = true;
+    }
 }

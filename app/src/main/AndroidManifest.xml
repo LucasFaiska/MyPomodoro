@@ -24,5 +24,11 @@
             android:name=".presenter.scenes.home.view.HomeActivity"
             android:screenOrientation="portrait" />
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="608debf62cfb8ad49f202da41f493cb4a69461cf" />
+
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

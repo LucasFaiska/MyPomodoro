@@ -10,6 +10,10 @@ import android.databinding.DataBindingUtil
 import com.lfaiska.mypomodoro.databinding.SplashActivityBinding
 import com.lfaiska.mypomodoro.presenter.scenes.home.view.HomeActivity
 import javax.inject.Inject
+import com.crashlytics.android.Crashlytics
+import io.fabric.sdk.android.Fabric
+
+
 
 /**
  * Created by lucas on 30/03/18.
@@ -24,6 +28,7 @@ class SplashActivity : AppCompatActivity(), SplashNavigation {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Fabric.with(this, Crashlytics())
         injectDependencies()
         binding = DataBindingUtil.setContentView(this, R.layout.splash_activity)
         viewModel.navigation = this
